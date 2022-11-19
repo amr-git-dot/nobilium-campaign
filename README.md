@@ -14,19 +14,19 @@ the attack starts by sending an email attachment with a word document named "Amb
 the first look at the file shows us that it has encrypted content and needs you to enable content to 
 decrypt it.
 
-![error](Screensoots/first.png)
+![error](Screenshoots/first.png)
 
 Using "oledump" we can see the embedded files on it 
 
-![error](Screensoots/oledump.png)
+![error](Screenshoots/oledump.png)
 
 then we can use "oleobj" to extract the hta stream from the document
 
-![error](Screensoots/htastream.png)
+![error](Screenshoots/htastream.png)
 
 Now we have this javascript & VBScript to deal with which contains a huge array and a decryption routine and execution script.
 
-![error](Screensoots/javascript.png)
+![error](Screenshoots/javascript.png)
 
 the decryption is so simple it's just xor with hard codded key
 then adding the "mz" header to the decrypted DLL file then executing it using "rundll32.exe" 
@@ -39,11 +39,11 @@ Now it's time to analyze the Dropped file.
 
 checking the file type and sha256sum and performing basic static analysis on different techniques like imports, strings, entropy,...etc
 
-![error](Screensoots/basic.png)
+![error](Screenshoots/basic.png)
 
-![error](Screensoots/strings.png)
+![error](Screenshoots/strings.png)
 
-![error](Screensoots/entropy.png)
+![error](Screenshoots/entropy.png)
 
 Here we notice that the malware has a TLS section means that there is a tls call-back function that will run before the start point of the application as an anti-debugging or VM technique.
 
@@ -51,5 +51,5 @@ Here we notice that the malware has a TLS section means that there is a tls call
 
 Then looking into the exported functions we can quickly understand what this piece of malware does which is to gather the information from the infected machine and send it back to the C2 Server.
 
-![error](Screensoots/malfunc.png)
+![error](Screenshoots/malfunc.png)
 
